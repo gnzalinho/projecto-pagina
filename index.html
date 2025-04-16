@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto servidor apache Linux</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #2a2a2a;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            border: 1px solid #444;
+            border-radius: 5px;
+            padding: 15px;
+            background-color: #333;
+        }
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .question-text {
+            font-weight: bold;
+            flex-grow: 1;
+            color: #fff;
+        }
+        .toggle-btn {
+            background-color: #555;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 18px;
+            transition: transform 0.3s;
+        }
+        .toggle-btn.open {
+            transform: rotate(180deg);
+            background-color: #666;
+        }
+        .answer-section {
+            display: none;
+            margin-top: 10px;
+        }
+        .answer-content {
+            background-color: #444;
+            color: #e0e0e0;
+            padding: 15px;
+            border-radius: 4px;
+            border: 1px solid #555;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 30px;
+        }
+        .title-text {
+            font-size: 24px;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+        
+        /* Estilos para la pantalla de carga */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #2a2a2a;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 5px solid #444;
+            border-radius: 50%;
+            border-top: 5px solid #888;
+            animation: spin 1.5s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        .loading-text {
+            color: #e0e0e0;
+            font-size: 18px;
+            letter-spacing: 2px;
+        }
+        
+        .progress-bar {
+            width: 200px;
+            height: 4px;
+            background-color: #444;
+            border-radius: 2px;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            width: 0%;
+            height: 100%;
+            background-color: #888;
+            border-radius: 2px;
+            transition: width 2s ease;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .content {
+            opacity: 0;
+            transition: opacity 0.5s ease-in;
+        }
+    </style>
+</head>
+<body>
+    <!-- Pantalla de carga -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader"></div>
+        <div class="loading-text">CARGANDO</div>
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="content" id="mainContent">
+        <div id="questionForm">
+            <!-- Título fijo -->
+            <div class="title-text">Preguntas del Proyecto Servidor Apache Linux</div>
+
+            <!-- Preguntas con respuestas ya incluidas -->
+            <div class="form-group">
+                <div class="question-header" onclick="toggleAnswer('answer1')">
+                    <div class="question-text">Pregunta 1: ¿Cómo fue el proceso de conexión con los nuevos usuarios?</div>
+                    <button type="button" class="toggle-btn" id="btn1">↓</button>
+                </div>
+                <div class="answer-section" id="answer1">
+                    <div class="answer-content">
+                        El proceso de conexión con los nuevos usuarios fue bastante directo. Primero creé los usuarios utilizando el comando "adduser" en la terminal de Linux. Luego configuré las contraseñas y permisos necesarios para cada uno. Finalmente, pude conectarme a través de SSH para verificar que el acceso funcionaba correctamente.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="question-header" onclick="toggleAnswer('answer2')">
+                    <div class="question-text">¿Qué diferencias viste entre crear y usar usuarios en Linux y en Windows?</div>
+                    <button type="button" class="toggle-btn" id="btn2">↓</button>
+                </div>
+                <div class="answer-section" id="answer2">
+                    <div class="answer-content">
+                        En Linux, la creación de usuarios se realiza principalmente a través de comandos en la terminal como "useradd" o "adduser", y la gestión de permisos es más granular utilizando el sistema de permisos basado en usuario/grupo/otros. En Windows, la gestión de usuarios se hace principalmente a través de interfaces gráficas y el sistema de permisos está más basado en roles y políticas. Linux ofrece mayor control a nivel de línea de comandos, mientras que Windows suele ser más visual pero con menos flexibilidad para configuraciones avanzadas.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="question-header" onclick="toggleAnswer('answer3')">
+                    <div class="question-text">Pregunta 3: ¿Tuviste errores? ¿Cómo los solucionaste?</div>
+                    <button type="button" class="toggle-btn" id="btn3">↓</button>
+                </div>
+                <div class="answer-section" id="answer3">
+                    <div class="answer-content">
+                        Sí, tuve algunos errores durante el proceso. El principal fue un problema con los permisos en los directorios home de los nuevos usuarios, lo que impedía que pudieran acceder correctamente. Lo solucioné revisando y corrigiendo los permisos con los comandos "chmod" y "chown". También enfrenté problemas con el archivo de configuración de SSH que resolví consultando la documentación y modificando el archivo sshd_config para permitir el acceso de los usuarios.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="question-header" onclick="toggleAnswer('answer4')">
+                    <div class="question-text">¿Para qué situaciones reales creés que sirve esto?</div>
+                    <button type="button" class="toggle-btn" id="btn4">↓</button>
+                </div>
+                <div class="answer-section" id="answer4">
+                    <div class="answer-content">
+                        Este conocimiento es útil para varias situaciones reales como: administración de servidores web donde múltiples usuarios necesitan acceso, configuración de entornos de desarrollo compartidos en empresas, gestión de servicios de hosting, implementación de sistemas de seguridad en redes corporativas, y mantenimiento de infraestructuras tecnológicas que requieren diferentes niveles de acceso según los roles de los usuarios. También es fundamental para cualquier trabajo en DevOps o administración de sistemas.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Función para mostrar/ocultar las respuestas
+        function toggleAnswer(answerId) {
+            const answerSection = document.getElementById(answerId);
+            const btnId = 'btn' + answerId.charAt(answerId.length - 1);
+            const toggleBtn = document.getElementById(btnId);
+            
+            if (answerSection.style.display === 'block') {
+                answerSection.style.display = 'none';
+                toggleBtn.classList.remove('open');
+            } else {
+                answerSection.style.display = 'block';
+                toggleBtn.classList.add('open');
+            }
+        }
+        
+        // Simulación de carga
+        window.onload = function() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            const mainContent = document.getElementById('mainContent');
+            const progress = document.getElementById('progress');
+            
+            // Simular progreso de carga
+            let width = 0;
+            const interval = setInterval(function() {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    
+                    // Mostrar el contenido principal y ocultar la pantalla de carga
+                    setTimeout(function() {
+                        loadingScreen.style.opacity = '0';
+                        mainContent.style.opacity = '1';
+                        
+                        // Eliminar completamente la pantalla de carga después de la transición
+                        setTimeout(function() {
+                            loadingScreen.style.display = 'none';
+                        }, 500);
+                    }, 300);
+                } else {
+                    width += 5;
+                    progress.style.width = width + '%';
+                }
+            }, 100);
+        };
+    </script>
+</body>
+</html>
