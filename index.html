@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+g<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -173,7 +173,7 @@
                 </div>
                 <div class="answer-section" id="answer2">
                     <div class="answer-content">
-                        En Linux, la creación de usuarios se realiza principalmente a través de comandos en la terminal como "useradd" o "adduser", y la gestión de permisos es más granular utilizando el sistema de permisos basado en usuario/grupo/otros. En Windows, la gestión de usuarios se hace principalmente a través de interfaces gráficas y el sistema de permisos está más basado en roles y políticas. Linux ofrece mayor control a nivel de línea de comandos, mientras que Windows suele ser más visual pero con menos flexibilidad para configuraciones avanzadas.
+                        La diferencia principal fue que para crear el usuario en windows se uso interfaz grafica y en linux se uso la consola de comandos, lo que lo hace un poco menos intuitivo que en windows
                     </div>
                 </div>
             </div>
@@ -185,7 +185,7 @@
                 </div>
                 <div class="answer-section" id="answer3">
                     <div class="answer-content">
-                        Sí, tuve algunos errores durante el proceso. El principal fue un problema con los permisos en los directorios home de los nuevos usuarios, lo que impedía que pudieran acceder correctamente. Lo solucioné revisando y corrigiendo los permisos con los comandos "chmod" y "chown". También enfrenté problemas con el archivo de configuración de SSH que resolví consultando la documentación y modificando el archivo sshd_config para permitir el acceso de los usuarios.
+                        En linux al ya haber creado e ingresado a nuestro usuario, cuando intentamos usar comandos que requieren permisos de administrador arrojaba un error de que el usuario no estaba en el archivo "sudoers", esto se soluciono usando el comando "sudo visudo", que manda a editar el archivo "sudoers", luego agregamos a la linea final "alumno1 ALL=(ALL) ALL" 
                     </div>
                 </div>
             </div>
