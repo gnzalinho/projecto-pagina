@@ -1,4 +1,4 @@
-g<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -161,7 +161,8 @@ g<!DOCTYPE html>
                 </div>
                 <div class="answer-section" id="answer1">
                     <div class="answer-content">
-                        Primero en Linux iniciamos como ec2-user para despues crear el usuario alumno1 con adduser, luego le asignamos contraseña y nos conectamos por SSH. En Windows a pesar de que es posible hacerlo por interfaz grafica lo hicimos por consola usando el comando net user alumno1 Contraseña123 /add y para que fuera posible conectarse via RDP pusimos net localgroup "Remote Desktop Users" alumno1 /add, luego hubo que conectarse descargando el archivo RDP e iniciando sesion con las credenciales de alumno1 
+                        Primero en Linux iniciamos como ec2-user para despues crear el usuario alumno1 con adduser, luego le asignamos contraseña y nos conectamos por SSH. En Windows a pesar de que es posible hacerlo por interfaz grafica lo hicimos por consola usando el comando net user alumno1 Contraseña123 /add y para que fuera posible conectarse via RDP pusimos net localgroup "Remote Desktop Users" alumno1 /add, luego hubo que conectarse descargando el archivo RDP e iniciando sesion con las credenciales de alumno1
+                    </div>
                 </div>
             </div>
 
@@ -184,7 +185,7 @@ g<!DOCTYPE html>
                 </div>
                 <div class="answer-section" id="answer3">
                     <div class="answer-content">
-                        En linux al ya haber creado e ingresado a nuestro usuario, cuando intentamos usar comandos que requieren permisos de administrador arrojaba un error de que el usuario no estaba en el archivo "sudoers", esto se soluciono usando el comando "sudo visudo", que manda a editar el archivo "sudoers", luego agregamos a la linea final "alumno1 ALL=(ALL) ALL" 
+                        En linux al ya haber creado e ingresado a nuestro usuario, cuando intentamos usar comandos que requieren permisos de administrador arrojaba un error de que el usuario no estaba en el archivo "sudoers", esto se soluciono usando el comando "sudo visudo", que manda a editar el archivo "sudoers", luego agregamos a la linea final "alumno1 ALL=(ALL) ALL"
                     </div>
                 </div>
             </div>
