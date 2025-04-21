@@ -135,7 +135,38 @@
             opacity: 0;
             transition: opacity 0.5s ease-in;
         }
+        
+        /* Estilos para el botón de descarga */
+        .download-container {
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .download-btn {
+            background-color: #555;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .download-btn:hover {
+            background-color: #666;
+        }
+        
+        .download-btn i {
+            margin-right: 8px;
+        }
     </style>
+    <!-- Iconos de Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <!-- Pantalla de carga -->
@@ -201,6 +232,13 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- Botón de descarga de PDF -->
+            <div class="download-container">
+                <button class="download-btn" onclick="downloadPDF()">
+                    <i class="fas fa-file-pdf"></i> Descargar PDF con Documentación
+                </button>
+            </div>
         </div>
     </div>
 
@@ -218,6 +256,23 @@
                 answerSection.style.display = 'block';
                 toggleBtn.classList.add('open');
             }
+        }
+        
+        // Función para descargar PDF
+        function downloadPDF() {
+            // Crear un enlace temporal
+            const link = document.createElement('a');
+            
+            // Aquí debes poner la ruta real a tu archivo PDF
+            link.href = 'documentacion.pdf'; // Cambia esto por la ruta correcta
+            
+            // Nombre del archivo que se descargará
+            link.download = 'documentacion.pdf';
+            
+            // Simular click en el enlace
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
         
         // Simulación de carga
